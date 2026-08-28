@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Milford Asset Management · Structure</title>
+<meta name="description" content="A navigable map of Milford Asset Management's board, executive, investment and client teams — built only from publicly available sources.">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23E47126'/><text y='72' x='50' font-size='62' text-anchor='middle' fill='white' font-family='Georgia,serif'>M</text></svg>">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="brandline">
+      <div class="brandmark">M</div>
+      <span>Milford Asset Management</span>
+    </div>
+    <h1>Who does what, and <em>who reports to whom</em></h1>
+    <p class="lede">A navigable map of Milford's board, group executive, investment and client teams — assembled entirely from
+      publicly available sources. Click any person for their remit, likely skills, reporting line and the sources behind it.</p>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<nav class="tabbar" aria-label="Sections">
+  <div class="wrap" role="tablist">
+    <button class="tab" role="tab" data-panel="panel-chart" aria-selected="true">Org chart</button>
+    <button class="tab" role="tab" data-panel="panel-dir" aria-selected="false">Directory</button>
+    <button class="tab" role="tab" data-panel="panel-news" aria-selected="false">News &amp; new hires</button>
+    <button class="tab" role="tab" data-panel="panel-method" aria-selected="false">Sources &amp; method</button>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <!-- ORG CHART -->
+    <section class="panel" id="panel-chart" role="tabpanel">
+      <h2 class="sec-head">Reporting structure</h2>
+      <p class="sec-sub">Solid facts and reasoned inference are separated throughout. Board membership, executive titles and the
+        three 2026 investment appointments are evidenced; most individual reporting lines below the executive are inferred from
+        titles and remits, and are labelled as such inside each profile.</p>
+      <div class="chart" id="chart"></div>
+    </section>
+
+    <!-- DIRECTORY -->
+    <section class="panel" id="panel-dir" role="tabpanel" hidden>
+      <h2 class="sec-head">Directory</h2>
+      <p class="sec-sub">Search by name, title, fund, location or skill.</p>
+      <div class="controls">
+        <input class="search" id="search" type="search" placeholder="Search people, funds, skills…" aria-label="Search people">
+        <button class="chip" data-unit="all" aria-pressed="true">All</button>
+        <button class="chip" data-unit="board" aria-pressed="false">Board</button>
+        <button class="chip" data-unit="exec" aria-pressed="false">Group Executive</button>
+        <button class="chip" data-unit="investment" aria-pressed="false">Investment</button>
+        <button class="chip" data-unit="client" aria-pressed="false">Client &amp; Distribution</button>
+      </div>
+      <div class="count" id="count"></div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <!-- NEWS -->
+    <section class="panel" id="panel-news" role="tabpanel" hidden>
+      <h2 class="sec-head">News &amp; new hires</h2>
+      <p class="sec-sub">Appointments, promotions and board changes reported in the trade and business press. Newest first.</p>
+      <ul class="timeline" id="timeline"></ul>
+    </section>
+
+    <!-- METHOD -->
+    <section class="panel" id="panel-method" role="tabpanel" hidden>
+      <h2 class="sec-head">Sources &amp; method</h2>
+      <div class="prose">
+        <p>Everything here comes from public web sources gathered on <strong id="researched"></strong> — Milford's own
+          <a href="https://milfordasset.com/about-us/team" target="_blank" rel="noopener noreferrer">New Zealand</a> and
+          <a href="https://milfordasset.com.au/about-us/our-team/" target="_blank" rel="noopener noreferrer">Australian</a>
+          team pages, public LinkedIn profile listings, and trade press including BusinessDesk, Good Returns, Investment News NZ,
+          Money Management, InvestorDaily and NBR. Each profile carries its own source list.</p>
+
+        <h3>How claims are labelled</h3>
+        <div class="legend">
+          <div><span class="badge ev">Evidenced</span><span>Stated on a public page — a Milford bio, a company announcement, or a news report.</span></div>
+          <div><span class="badge mx">Part evidenced, part inferred</span><span>The role is public; some listed duties are the ordinary scope of that role rather than a published fact.</span></div>
+          <div><span class="badge inf">Inferred</span><span>A reasoned assumption from title, remit and industry norms. Treat as a hypothesis, not a fact.</span></div>
+        </div>
+
+        <h3>Reporting lines</h3>
+        <p>Milford does not publish an org chart. Board composition and the Chief Executive's accountability to the Board are
+          structural facts. Everything below that is inferred: group executives are shown reporting to the CEO because they are
+          grouped as &ldquo;Group Executives&rdquo; on Milford's site; the deputy CIOs and the three 2026 investment heads are
+          shown under the CIO because Wayne Gentle announced their appointments in his capacity as CIO. Placement of individual
+          portfolio managers, analysts and client-facing staff is inference from their published remit.</p>
+
+        <h3>Skills and toolsets</h3>
+        <p>The &ldquo;likely skills &amp; toolset&rdquo; on each profile is <strong>inference throughout</strong>, drawn from the
+          person's published background and the normal requirements of their role. It is not a claim about what any individual
+          actually uses day to day.</p>
+
+        <h3>Photographs</h3>
+        <p id="photo-note">Profile images are generated monograms in Milford's brand palette, not photographs. LinkedIn's member
+          photos are served from an authenticated CDN that blocks hotlinking and prohibits scraping, and the environment this page
+          was built in had no outbound access to LinkedIn or to milfordasset.com. To use real photographs, drop image files named
+          <code>&lt;slug&gt;.jpg</code> into <code>assets/photos/</code> and run <code>node tools/photos.js</code> — anyone without
+          a photograph keeps their monogram. See <code>assets/photos/README.md</code>.</p>
+
+        <h3>Brand palette</h3>
+        <p>Colours are Milford's published brand values — <code>#E47126</code> (Zest), <code>#EFA163</code> (Sandy brown) and
+          <code>#303C42</code> (Outer Space) — per
+          <a href="https://brandfetch.com/milfordasset.com" target="_blank" rel="noopener noreferrer">Brandfetch's record for milfordasset.com</a>.</p>
+
+        <h3>Caveats</h3>
+        <ul>
+          <li>This is a third-party reconstruction. It is not published, endorsed or verified by Milford Asset Management.</li>
+          <li id="facts-note"></li>
+          <li>People move. Anything here can be out of date the day after it was gathered.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Independent reconstruction from public sources. Not affiliated with, endorsed by, or verified by Milford Asset Management.</div>
+    <div>Research pass: 28 August 2026</div>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Profile" aria-hidden="true">
+  <div class="dr-head" id="dr-head"></div>
+  <div class="dr-body" id="dr-body"></div>
+</aside>
+
+<script src="data/people.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

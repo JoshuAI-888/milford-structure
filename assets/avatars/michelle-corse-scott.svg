@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" role="img" aria-label="Michelle Corse-Scott">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C4601F"/><stop offset="1" stop-color="#8F4315"/></linearGradient></defs>
+  <rect width="160" height="160" rx="80" fill="url(#g)"/>
+  <circle cx="128" cy="34" r="46" fill="#ffffff" opacity="0.07"/>
+  <text x="80" y="80" fill="#ffffff" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="400" letter-spacing="1" text-anchor="middle" dominant-baseline="central">MS</text>
+</svg>
