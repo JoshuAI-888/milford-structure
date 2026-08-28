@@ -21,10 +21,18 @@ under `file://` and everyone shows a monogram.
 
 ## Publishing on GitHub Pages
 
-`.github/workflows/pages.yml` deploys the repo root on every push to `main`.
-Enable it once at **Settings → Pages → Build and deployment → Source: GitHub
-Actions**. The workflow validates the dataset (every `reportsTo` must resolve)
-before deploying.
+`.github/workflows/pages.yml` deploys the repo root on every push to the
+default branch. Enable it once at **Settings → Pages → Build and deployment →
+Source: GitHub Actions** — until that is set, the deploy step fails even though
+the workflow itself is fine.
+
+The workflow runs `node tools/validate.js` first, so a typo in the dataset
+fails the build rather than shipping a broken page. Run it locally before
+pushing:
+
+```bash
+node tools/validate.js
+```
 
 ## Layout
 
@@ -36,6 +44,7 @@ assets/css/style.css        Milford brand palette
 assets/avatars/*.svg        generated monograms, one per person
 assets/photos/              drop real photographs here (see its README)
 tools/photos.js             regenerates assets/photos/manifest.json
+tools/validate.js           dataset sanity checks, also run in CI
 ```
 
 Everything is driven by `data/people.js`. Editing a person there updates the org

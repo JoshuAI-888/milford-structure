@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - claude/milford-org-chart-webpage-xt5he0
   workflow_dispatch:
 
 permissions:
@@ -23,15 +25,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check the dataset parses
-        run: node -e "const m=require('./data/people.js');
-          const s=new Set(m.people.map(p=>p.slug));
-          m.people.forEach(p=>{ if(p.reportsTo && !s.has(p.reportsTo)) { throw new Error('bad reportsTo: '+p.slug); } });
-          console.log(m.people.length+' people, '+m.timeline.length+' timeline entries');"
+      - name: Validate dataset
+        run: node tools/validate.js
 
       - uses: actions/configure-pages@v5
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
+
       - id: deploy
         uses: actions/deploy-pages@v4
